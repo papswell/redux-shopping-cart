@@ -4,24 +4,15 @@ import ReactToggle from 'react-toggle';
 import 'react-toggle/style.css';
 import noop from './../utils/no-op';
 
-import ProductList from './product-list';
-import Cart from './cart';
+import ProductList from './../containers/products';
+import Cart from './../containers/cart';
 import Counter from './cart/counter';
-
-import products from './../utils/products';
-
-const cartProducts = products
-  .map(p => ({
-    ...p,
-    quantity: 1,
-  }))
-  .slice(0, 2);
-
-const counter = 3;
-const amount = 1337;
 
 class App extends Component {
   render() {
+
+    const { itemCount } = this.props;
+
     return (
       <div className="App">
         <Navbar>
@@ -39,9 +30,8 @@ class App extends Component {
               </div>
             </NavItem>
             <NavItem eventKey={2}>
-              <Counter count={counter} />
+              <Counter count={itemCount} />
             </NavItem>
-
           </Nav>
         </Navbar>
 
@@ -50,15 +40,12 @@ class App extends Component {
             <Col sm={6}>
               <h2>Our products</h2>
               <ProductList
-                products={products}
                 addToCart={noop}
               />
             </Col>
             <Col sm={6}>
               <h2>Your shopping cart</h2>
               <Cart
-                products={cartProducts}
-                amount={amount}
                 addToCart={noop}
                 removeFromCart={noop}
               />

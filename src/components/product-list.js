@@ -18,7 +18,7 @@ export const makeList = (Item) => class ProductList extends Component {
 
     return (
       <div className="list">
-        {products.map(product => <Item {...product} {...props} />)}
+        {products.map(product => <Item key={product.id} {...product} {...props} />)}
       </div>
     );
   }
