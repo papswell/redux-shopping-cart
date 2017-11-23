@@ -17,6 +17,7 @@ class CartTotal extends Component {
           <Button
             bsStyle="primary"
             bsSize="large"
+            disabled={!amount}
           >
             BUY NOW !
           </Button>

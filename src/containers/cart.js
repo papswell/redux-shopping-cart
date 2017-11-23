@@ -4,7 +4,7 @@ import {
   addToCart,
   removeFromCart,
 } from './../actions';
-
+import isStockLimitReached from './../store/selectors/is-stock-limit-reached';
 import Cart from './../components/cart';
 
 const mapStateToProps = (state) => {
@@ -16,6 +16,7 @@ const mapStateToProps = (state) => {
     .map(p => ({
       ...p,
       quantity: state.cart.products[p.id],
+      isAddDisabled: isStockLimitReached(state, p.id),
     }));
 
   const amount = products.reduce((acc, product) => {

@@ -28,6 +28,7 @@ class Item extends Component {
       name,
       price,
       quantity,
+      isAddDisabled,
     } = this.props;
 
     return (
@@ -44,11 +45,13 @@ class Item extends Component {
           <ButtonGroup>
             <Button
               onClick={this.handleRemoveFromCartClick}
+              disabled={!quantity}
               >
               <Glyphicon glyph="minus" />
             </Button>
             <Button
               onClick={this.handleAddToCartClick}
+              disabled={isAddDisabled}
               >
               <Glyphicon glyph="plus" />
             </Button>
