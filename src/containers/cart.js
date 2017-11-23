@@ -1,17 +1,36 @@
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import {
+  addToCart,
+  removeFromCart,
+} from './../actions';
 
 import Cart from './../components/cart';
 
 const mapStateToProps = (state) => {
-  const selected = state.cart.list;
+
+  const selected = Object.keys(state.cart.products);
+
+  const products = state.products.list
+    .filter(product => selected.includes(product.id))
+    .map(p => ({
+      ...p,
+      quantity: state.cart.products[p.id],
+    }));
+
+  const amount = products.reduce((acc, product) => {
+    return acc + product.price * product.quantity;
+  }, 0);
+
   return ({
-    products: state.products.list
-      .filter(product => selected.includes(product.id))
-      .map(p => ({
-        ...p,
-        quantity: state.cart.quantity[p.id],
-      })),
+    amount,
+    products,
   })
 };
 
-export default connect(mapStateToProps)(Cart);
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: bindActionCreators(addToCart, dispatch),
+  removeFromCart: bindActionCreators(removeFromCart, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

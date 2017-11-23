@@ -39,9 +39,7 @@ class App extends Component {
           <Row>
             <Col sm={6}>
               <h2>Our products</h2>
-              <ProductList
-                addToCart={noop}
-              />
+              <ProductList />
             </Col>
             <Col sm={6}>
               <h2>Your shopping cart</h2>
