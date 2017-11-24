@@ -1,8 +1,9 @@
+import _products from './../../utils/products';
+
 const initialState = {
-  /**
-   * List of all products
-   */
-  list: [],
+  list: _products,
 };
 
-export default (state = initialState, action) => state;
+export default (state = initialState, action) => {
+  return state;
+}
