@@ -3,6 +3,7 @@ import { bindActionCreators } from 'redux';
 import {
   addToCart,
   removeFromCart,
+  sendCart,
 } from './../actions';
 import isStockLimitReached from './../store/selectors/is-stock-limit-reached';
 import Cart from './../components/cart';
@@ -26,12 +27,14 @@ const mapStateToProps = (state) => {
   return ({
     amount,
     products,
+    isSaving: state.cart.isSaving,
   })
 };
 
 const mapDispatchToProps = (dispatch) => ({
   addToCart: bindActionCreators(addToCart, dispatch),
   removeFromCart: bindActionCreators(removeFromCart, dispatch),
+  save: bindActionCreators(sendCart, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);

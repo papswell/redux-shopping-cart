@@ -7,6 +7,10 @@ export const FETCH_INITIAL_DATA = 'FETCH_INITIAL_DATA';
 export const FETCH_INITIAL_DATA_SUCCESS = 'FETCH_INITIAL_DATA_SUCCESS';
 export const FETCH_INITIAL_DATA_ERROR = 'FETCH_INITIAL_DATA_ERROR';
 
+export const SEND_CART = 'SEND_CART';
+export const SEND_CART_SUCCESS = 'SEND_CART_SUCCESS';
+export const SEND_CART_ERROR = 'SEND_CART_ERROR';
+
 export const addToCart = (id) => ({
   type: ADD_TO_CART,
   payload: { id },
@@ -32,6 +36,24 @@ export const fetchInitialData = () => (dispatch) => {
     .catch(e => {
       dispatch({
         type: FETCH_INITIAL_DATA_ERROR,
+      });
+    })
+};
+
+export const sendCart = () => (dispatch) => {
+  dispatch({
+    type: SEND_CART,
+  });
+
+  api.sendCart()
+    .then(() => {
+      dispatch({
+        type: SEND_CART_SUCCESS,
+      });
+    })
+    .catch(e => {
+      dispatch({
+        type: SEND_CART_ERROR,
       });
     })
 };

@@ -3,6 +3,9 @@ import _products from './../../utils/products';
 import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
+  SEND_CART,
+  SEND_CART_SUCCESS,
+  SEND_CART_ERROR,
 } from './../../actions';
 
 const cartProducts = _products
@@ -16,12 +19,18 @@ const initialState = {
   products: cartProducts.reduce((acc, product) => {
     acc[product.id] = product.quantity;
     return acc;
-  }, {})
+  }, {}),
+
+  isSaving: false,
 };
 
 const products = (state = initialState.products, action) => {
 
   switch (action.type) {
+
+    case SEND_CART_SUCCESS:
+      return {};
+
     case ADD_TO_CART: {
       const id = action.payload.id;
       return {
@@ -51,7 +60,22 @@ const products = (state = initialState.products, action) => {
   }
 }
 
+const handleSave = (state = initialState.isSaving, action) => {
+  switch (action.type) {
+    case SEND_CART:
+      return true;
+
+    case SEND_CART_SUCCESS:
+    case SEND_CART_ERROR:
+      return false;
+
+    default:
+      return state;
+  }
+}
+
 
 export default (state = initialState, action) => ({
   products: products(state.products, action),
+  isSaving: handleSave(state.isSaving, action)
 });

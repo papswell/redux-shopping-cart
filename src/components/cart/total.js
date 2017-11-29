@@ -3,11 +3,18 @@ import { Button } from 'react-bootstrap';
 
 class CartTotal extends Component {
 
+  handleClick = (e) => {
+    e.preventDefault();
+    this.props.onClick();
+  }
+
   render() {
 
     const {
-      amount
+      amount,
+      isSaving,
     } = this.props;
+
     return (
       <div className="cart_total-container">
         <div className="cart_total">
@@ -17,9 +24,10 @@ class CartTotal extends Component {
           <Button
             bsStyle="primary"
             bsSize="large"
-            disabled={!amount}
+            disabled={!amount || isSaving}
+            onClick={this.handleClick}
           >
-            BUY NOW !
+            {isSaving ? 'Saving cart...' : 'BUY NOW !'}
           </Button>
         </div>
       </div>

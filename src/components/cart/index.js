@@ -6,11 +6,11 @@ class Cart extends Component {
 
   render() {
 
-    const  { amount, ...props } = this.props;
+    const  { amount, save, isSaving, ...props } = this.props;
     return (
       <div>
         <List {...props} />
-        <Total amount={amount} />
+        <Total amount={amount} onClick={save} isSaving={isSaving} />
       </div>
     );
   }
