@@ -54,6 +54,7 @@ export const sendCart = () => (dispatch) => {
     .catch(e => {
       dispatch({
         type: SEND_CART_ERROR,
+        error: e,
       });
     })
 };

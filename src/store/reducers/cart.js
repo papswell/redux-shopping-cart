@@ -22,6 +22,8 @@ const initialState = {
   }, {}),
 
   isSaving: false,
+
+  error: null,
 };
 
 const products = (state = initialState.products, action) => {
@@ -77,5 +79,6 @@ const handleSave = (state = initialState.isSaving, action) => {
 
 export default (state = initialState, action) => ({
   products: products(state.products, action),
-  isSaving: handleSave(state.isSaving, action)
+  isSaving: handleSave(state.isSaving, action),
+  error: action.error ? action.error.message : null,
 });

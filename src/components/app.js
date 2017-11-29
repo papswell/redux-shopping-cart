@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Grid, Row, Col, Navbar, Nav, NavItem, Alert } from 'react-bootstrap';
 import ReactToggle from 'react-toggle';
 import 'react-toggle/style.css';
 import noop from './../utils/no-op';
@@ -11,7 +11,7 @@ import Counter from './cart/counter';
 class App extends Component {
   render() {
 
-    const { itemCount } = this.props;
+    const { itemCount, error } = this.props;
 
     return (
       <div className="App">
@@ -35,7 +35,17 @@ class App extends Component {
           </Nav>
         </Navbar>
 
+
         <Grid>
+          {error && (
+            <Row>
+              <Col sm={12}>
+                <Alert bsStyle="danger">
+                  {error}
+                </Alert>
+              </Col>
+            </Row>
+          )}
           <Row>
             <Col sm={6}>
               <h2>Our products</h2>
