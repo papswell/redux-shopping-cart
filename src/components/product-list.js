@@ -1,27 +1,26 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ProductItem from './product-item';
+import makeList from './list';
 
-export const makeList = (Item) => class ProductList extends Component {
+const ProductList = makeList(ProductItem);
 
-  static propTypes = {
-    products: PropTypes.array.isRequired,
-    addToCart: PropTypes.func.isRequired,
+export default class Products extends Component {
+
+  componentDidMount() {
+    this.props.fetch();
   }
 
   render() {
 
-    const {
-      products,
-      ...props
-    } = this.props;
+    const { fetch, isLoading, ...props } = this.props;
 
     return (
-      <div className="list">
-        {products.map(product => <Item key={product.id} {...product} {...props} />)}
-      </div>
-    );
+      isLoading ? (
+        <div>Loading data...</div>
+      ) : (
+        <ProductList {...props} />
+      )
+    )
   }
 }
-
-export default makeList(ProductItem);
