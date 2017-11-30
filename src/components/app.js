@@ -18,14 +18,19 @@ class App extends Component {
     }
   }
 
+
+  componentDidMount() {
+    this.props.fetchProducts();
+  }
+
   componentWillReceiveProps(nextProps) {
-    console.log('APP WILL RECEIVE');
     this.setState({
       ...nextProps,
     });
   }
   render() {
 
+    const { isLoading } = this.props;
     const counter = this.state.counter;
 
     return (
@@ -55,7 +60,8 @@ class App extends Component {
           <Row>
             <Col sm={6}>
               <h2>Our products</h2>
-              <ProductList />
+              { isLoading ? 'Loading' : <ProductList />}
+
             </Col>
             <Col sm={6}>
               <h2>Your shopping cart</h2>

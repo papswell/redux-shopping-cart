@@ -1,3 +1,4 @@
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import Cart from './../components/cart';
 
@@ -32,16 +33,22 @@ const mapStateToProps = (state) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addToCart: (id) => {
-      dispatch(actionAddToCart(id));
-    },
-
-    removeFromCart: (id) => {
-      dispatch(removeFromCart(id));
-    },
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  addToCart: bindActionCreators(actionAddToCart, dispatch),
+  removeFromCart: bindActionCreators(removeFromCart, dispatch),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+//
+// const BadExample extends ReacT {
+//
+//   handleclick = (e)=> {
+//     this.props.dispatch({
+//       type: BUTTON_CLICK
+//     })
+//   }
+//
+//   render() {
+//     <Button onCLick={this?handleclick} />
+//   }
+// }
