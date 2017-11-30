@@ -39,16 +39,3 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cart);
-//
-// const BadExample extends ReacT {
-//
-//   handleclick = (e)=> {
-//     this.props.dispatch({
-//       type: BUTTON_CLICK
-//     })
-//   }
-//
-//   render() {
-//     <Button onCLick={this?handleclick} />
-//   }
-// }
