@@ -1,11 +1,15 @@
-export default state => {
+import { createSelector } from 'reselect';
+import getProducts from './get-products';
 
-  const selected = state.cart.get('products').keySeq();
+export const getCartproducts = state => state.cart.get('products');
 
-  return state.products
-    .get('list')
+export default createSelector([
+  getProducts,
+  getCartproducts,
+], (products, cartProducts) => {
+  const selected = cartProducts.keySeq();
+
+  return products
     .filter(product => selected.includes(product.get('id')))
-    .map(p => p.set('quantity', state.cart
-      .getIn(['products', p.get('id')])
-    ));
-}
+    .map(p => p.set('quantity', cartProducts.get(p.get('id'))));
+});

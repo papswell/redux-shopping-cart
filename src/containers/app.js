@@ -21,6 +21,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchInitialData,
+  sendUselessAction: () => ({ type: 'USELESS' }),
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(toJS(App));

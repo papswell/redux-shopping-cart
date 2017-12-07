@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Grid, Row, Col, Navbar, Nav, NavItem, Alert } from 'react-bootstrap';
+import {Button, Grid, Row, Col, Navbar, Nav, NavItem, Alert } from 'react-bootstrap';
 import ReactToggle from 'react-toggle';
 import 'react-toggle/style.css';
 import noop from './../utils/no-op';
@@ -16,7 +16,7 @@ class App extends Component {
 
   render() {
 
-    const { categories, itemCount, error } = this.props;
+    const { categories, itemCount, error, sendUselessAction } = this.props;
 
     return (
       <div className="App">
@@ -27,7 +27,13 @@ class App extends Component {
             </Navbar.Brand>
           </Navbar.Header>
 
+
           <Nav pullRight>
+            <NavItem eventKey={0}>
+              <Button onClick={sendUselessAction}>
+                Dispatch useless action
+              </Button>
+            </NavItem>
             <NavItem eventKey={1}>
               <div className="toggle-container">
                 <span>Display only items in stock</span>
