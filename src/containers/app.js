@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 import App from './../components/app';
 
+import getTotalItemCount from './../store/selectors/get-total-item-count';
+import getError from './../store/selectors/get-error';
+
 export default connect((state) => ({
-  itemCount: Object.values(state.cart.products).reduce((acc, qty) => acc + qty, 0),
-  error: state.cart.error,
+  itemCount: getTotalItemCount(state),
+  error: getError(state),
 }))(App);

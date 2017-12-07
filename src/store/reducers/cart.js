@@ -21,7 +21,7 @@ const initialState = {
     return acc;
   }, {}),
 
-  isSaving: false,
+  isLoading: false,
 
   error: null,
 };
@@ -62,7 +62,7 @@ const products = (state = initialState.products, action) => {
   }
 }
 
-const handleSave = (state = initialState.isSaving, action) => {
+const handleSave = (state = initialState.isLoading, action) => {
   switch (action.type) {
     case SEND_CART:
       return true;
@@ -79,6 +79,6 @@ const handleSave = (state = initialState.isSaving, action) => {
 
 export default (state = initialState, action) => ({
   products: products(state.products, action),
-  isSaving: handleSave(state.isSaving, action),
+  isLoading: handleSave(state.isLoading, action),
   error: action.error ? action.error.message : null,
 });
