@@ -23,6 +23,7 @@ handlers[FETCH_INITIAL_DATA] = (state, action) => ({
 });
 
 handlers[FETCH_INITIAL_DATA_SUCCESS] = (state, action) => ({
+  ...state,
   list: state.list.concat(action.payload.products.map(p => ({
     ...p,
     initialStock: p.stock,

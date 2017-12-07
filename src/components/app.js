@@ -16,7 +16,7 @@ class App extends Component {
 
   render() {
 
-    const { itemCount, error } = this.props;
+    const { categories, itemCount, error } = this.props;
 
     return (
       <div className="App">
@@ -52,19 +52,12 @@ class App extends Component {
             </Row>
           )}
           <Row>
-
-            <Col sm={4}>
-              <h2>T shirts</h2>
-              <ProductList />
-            </Col>
-            <Col sm={4}>
-              <h2>Pulls</h2>
-              <ProductList />
-            </Col>
-            <Col sm={4}>
-              <h2>Pantalons</h2>
-              <ProductList />
-            </Col>
+            {categories.map(category => (
+              <Col sm={4} key={category.id}>
+                <h2>{category.name}</h2>
+                <ProductList category={category.id}/>
+              </Col>
+            ))}
           </Row>
           <Row>
             <Col sm={12}>

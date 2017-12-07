@@ -5,6 +5,7 @@ import App from './../components/app';
 
 import getTotalItemCount from './../store/selectors/get-total-item-count';
 import getError from './../store/selectors/get-error';
+import getCategories from './../store/selectors/get-categories';
 
 import {
   fetchInitialData,
@@ -13,6 +14,7 @@ import {
 const mapStateToProps = (state) => ({
   itemCount: getTotalItemCount(state),
   error: getError(state),
+  categories: getCategories(state),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

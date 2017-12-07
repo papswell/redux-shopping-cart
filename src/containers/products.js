@@ -12,8 +12,9 @@ import ProductList from './../components/product-list';
 
 const isLoadingProducts = isLoading('products');
 
-const mapStateToProps = (state) => ({
-  products: getProducts(state),
+const mapStateToProps = (state, props) => ({
+  products: getProducts(state)
+    .filter(p => p.category === props.category),
   isLoading: isLoadingProducts(state),
 });
 
