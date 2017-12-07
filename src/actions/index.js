@@ -34,6 +34,7 @@ export const fetchInitialData = () => (dispatch) => {
       });
     })
     .catch(e => {
+      console.log('E', e);
       dispatch({
         type: FETCH_INITIAL_DATA_ERROR,
       });

@@ -1,5 +1,3 @@
-import _products from './../../utils/products';
-
 import {
   ADD_TO_CART,
   REMOVE_FROM_CART,
@@ -8,21 +6,9 @@ import {
   SEND_CART_ERROR,
 } from './../../actions';
 
-const cartProducts = _products
-  .map(p => ({
-    ...p,
-    quantity: 1,
-  }))
-  .slice(0, 2)
-
 const initialState = {
-  products: cartProducts.reduce((acc, product) => {
-    acc[product.id] = product.quantity;
-    return acc;
-  }, {}),
-
+  products: {},
   isLoading: false,
-
   error: null,
 };
 
