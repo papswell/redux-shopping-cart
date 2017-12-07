@@ -14,14 +14,15 @@ import isLoading from './../store/selectors/is-loading';
 
 import Cart from './../components/cart';
 
+import toJS from './../utils/to-js';
+
 const isCartSaving = isLoading('cart');
 
 const mapStateToProps = (state) => ({
   amount: getTotalAmount(state),
   isSaving: isCartSaving(state),
   products: getProductsInCart(state)
-    .map(p => p.set('isAddDisabled', isStockLimitReached(state, p.get('id'))))
-    .toJS(),
+    .map(p => p.set('isAddDisabled', isStockLimitReached(state, p.get('id')))),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
@@ -30,4 +31,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   save: sendCart,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(toJS(Cart));

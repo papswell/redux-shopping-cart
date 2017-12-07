@@ -7,6 +7,8 @@ import getTotalItemCount from './../store/selectors/get-total-item-count';
 import getError from './../store/selectors/get-error';
 import getCategories from './../store/selectors/get-categories';
 
+import toJS from './../utils/to-js';
+
 import {
   fetchInitialData,
 } from './../actions';
@@ -21,4 +23,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
   fetchInitialData,
 }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(toJS(App));
