@@ -20,10 +20,8 @@ const mapStateToProps = (state) => ({
   amount: getTotalAmount(state),
   isSaving: isCartSaving(state),
   products: getProductsInCart(state)
-    .map(p => ({
-      ...p,
-      isAddDisabled: isStockLimitReached(state, p.id),
-    })),
+    .map(p => p.set('isAddDisabled', isStockLimitReached(state, p.get('id'))))
+    .toJS(),
 });
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({

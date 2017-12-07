@@ -1,1 +1,1 @@
-export default state => state.products.categories;
+export default state => state.products.get('categories');

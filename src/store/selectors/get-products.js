@@ -1,1 +1,1 @@
-export default state => state.products.list;
+export default state => state.products.get('list');

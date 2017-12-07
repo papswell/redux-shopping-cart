@@ -1,3 +1,4 @@
+import { List, Map, fromJS } from 'immutable';
 import createReducer from './create-reducer';
 import { categories } from './../../utils/products';
 
@@ -9,57 +10,37 @@ import {
   FETCH_INITIAL_DATA_ERROR,
 } from './../../actions';
 
-const initialState = {
+const initialState = Map({
   categories,
-  list: [],
+  list: List(),
   isLoading: false,
-};
+});
 
 const handlers = {};
 
-handlers[FETCH_INITIAL_DATA] = (state, action) => ({
-  ...state,
-  isLoading: true,
-});
+handlers[FETCH_INITIAL_DATA] = (state, action) => state.set('isLoading', true);
 
-handlers[FETCH_INITIAL_DATA_SUCCESS] = (state, action) => ({
-  ...state,
-  list: state.list.concat(action.payload.products.map(p => ({
-    ...p,
-    initialStock: p.stock,
-  }))),
-  isLoading: false,
-});
+handlers[FETCH_INITIAL_DATA_SUCCESS] = (state, action) => state
+  .set('isLoading', false)
+  .set('list', fromJS(action.payload.products).map(p => p.set('initialStock', p.get('stock'))));
 
-handlers[FETCH_INITIAL_DATA_ERROR] = (state, action) => ({
-  ...state,
-  isLoading: true,
-});
+handlers[FETCH_INITIAL_DATA_ERROR] = (state, action) => state
+  .set('isLoading', false);
 
-handlers[ADD_TO_CART] = (state, action) => ({
-  ...state,
-  list: state.list.map(product => {
-    if (product.id === action.payload.id) {
-      return {
-        ...product,
-        stock: product.stock - 1,
-      }
+handlers[ADD_TO_CART] = (state, action) => state.update('list',
+  (list) => list.map(product => {
+    if (product.get('id') === action.payload.id) {
+      return product.set('stock', product.get('stock') - 1)
     }
     return product;
-  }),
-});
+  }));
 
-handlers[REMOVE_FROM_CART] = (state, action) => ({
-  ...state,
-  list: state.list.map(product => {
-    if (product.id === action.payload.id) {
-      return {
-        ...product,
-        stock: product.stock + 1,
-      }
+handlers[REMOVE_FROM_CART] = (state, action) => state.update('list',
+  (list) => list.map(product => {
+    if (product.get('id') === action.payload.id) {
+      return product.set('stock', product.get('stock') + 1)
     }
     return product;
-  }),
-});
+  }));
 
 export default createReducer(initialState, handlers);

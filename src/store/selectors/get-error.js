@@ -1,1 +1,1 @@
-export default state => state.products.error || state.cart.error;
+export default state => state.products.get('error') || state.cart.get('error');

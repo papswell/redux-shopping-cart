@@ -14,7 +14,8 @@ const isLoadingProducts = isLoading('products');
 
 const mapStateToProps = (state, props) => ({
   products: getProducts(state)
-    .filter(p => p.category === props.category),
+    .filter(p => p.get('category') === props.category)
+    .toJS(),
   isLoading: isLoadingProducts(state),
 });
 

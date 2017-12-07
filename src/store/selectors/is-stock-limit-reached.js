@@ -1,9 +1,9 @@
 export default (state, id) => {
-  const products = state.products.list;
-  const cartProducts = state.cart.products;
+  const products = state.products.get('list');
+  const cartProducts = state.cart.get('products');
 
-  const alreadySelectedQty = cartProducts[id];
-  if (alreadySelectedQty >= products.find(p => p.id === id).initialStock) {
+  const alreadySelectedQty = cartProducts.get(id);
+  if (alreadySelectedQty >= products.find(p => p.get('id') === id).get('initialStock')) {
     return true;
   }
   return false;

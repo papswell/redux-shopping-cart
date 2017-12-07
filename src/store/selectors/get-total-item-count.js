@@ -1,1 +1,3 @@
-export default state => Object.values(state.cart.products).reduce((acc, qty) => acc + qty, 0);
+export default state => state.cart
+  .get('products')
+  .reduce((acc, qty) => acc + qty, 0);

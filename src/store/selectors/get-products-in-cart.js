@@ -1,11 +1,11 @@
 export default state => {
 
-  const selected = Object.keys(state.cart.products);
+  const selected = state.cart.get('products').keySeq();
 
-  return state.products.list
-    .filter(product => selected.includes(product.id))
-    .map(p => ({
-      ...p,
-      quantity: state.cart.products[p.id],
-    }));
+  return state.products
+    .get('list')
+    .filter(product => selected.includes(product.get('id')))
+    .map(p => p.set('quantity', state.cart
+      .getIn(['products', p.get('id')])
+    ));
 }
