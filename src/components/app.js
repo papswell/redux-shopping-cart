@@ -9,6 +9,11 @@ import Cart from './../containers/cart';
 import Counter from './cart/counter';
 
 class App extends Component {
+
+  componentDidMount() {
+    this.props.fetchInitialData();
+  }
+
   render() {
 
     const { itemCount, error } = this.props;
@@ -47,11 +52,22 @@ class App extends Component {
             </Row>
           )}
           <Row>
-            <Col sm={6}>
-              <h2>Our products</h2>
+
+            <Col sm={4}>
+              <h2>T shirts</h2>
               <ProductList />
             </Col>
-            <Col sm={6}>
+            <Col sm={4}>
+              <h2>Pulls</h2>
+              <ProductList />
+            </Col>
+            <Col sm={4}>
+              <h2>Pantalons</h2>
+              <ProductList />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={12}>
               <h2>Your shopping cart</h2>
               <Cart
                 addToCart={noop}

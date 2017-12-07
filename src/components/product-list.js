@@ -7,13 +7,9 @@ const ProductList = makeList(ProductItem);
 
 export default class Products extends Component {
 
-  componentDidMount() {
-    this.props.fetch();
-  }
-
   render() {
 
-    const { fetch, isLoading, ...props } = this.props;
+    const { isLoading, ...props } = this.props;
 
     return (
       isLoading ? (

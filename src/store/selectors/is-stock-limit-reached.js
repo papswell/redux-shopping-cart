@@ -3,7 +3,7 @@ export default (state, id) => {
   const cartProducts = state.cart.products;
 
   const alreadySelectedQty = cartProducts[id];
-  if (alreadySelectedQty >= products.find(p => p.id === id).initialQuantity) {
+  if (alreadySelectedQty >= products.find(p => p.id === id).initialStock) {
     return true;
   }
   return false;

@@ -1,4 +1,5 @@
 import createReducer from './create-reducer';
+import { categories } from './../../utils/products';
 
 import {
   ADD_TO_CART,
@@ -9,6 +10,7 @@ import {
 } from './../../actions';
 
 const initialState = {
+  categories,
   list: [],
   isLoading: false,
 };
@@ -21,7 +23,10 @@ handlers[FETCH_INITIAL_DATA] = (state, action) => ({
 });
 
 handlers[FETCH_INITIAL_DATA_SUCCESS] = (state, action) => ({
-  list: state.list.concat(action.payload.products),
+  list: state.list.concat(action.payload.products.map(p => ({
+    ...p,
+    initialStock: p.stock,
+  }))),
   isLoading: false,
 });
 
@@ -36,7 +41,7 @@ handlers[ADD_TO_CART] = (state, action) => ({
     if (product.id === action.payload.id) {
       return {
         ...product,
-        quantity: product.quantity - 1,
+        stock: product.stock - 1,
       }
     }
     return product;
@@ -49,7 +54,7 @@ handlers[REMOVE_FROM_CART] = (state, action) => ({
     if (product.id === action.payload.id) {
       return {
         ...product,
-        quantity: product.quantity + 1,
+        stock: product.stock + 1,
       }
     }
     return product;

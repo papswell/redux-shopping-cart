@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import {
   addToCart,
-  fetchInitialData,
 } from './../actions';
 
 import getProducts from './../store/selectors/get-products';
@@ -20,7 +19,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   addToCart,
-  fetch: fetchInitialData,
 }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

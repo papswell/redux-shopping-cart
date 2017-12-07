@@ -8,7 +8,7 @@ class ProductItem extends Component {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     price: PropTypes.number.isRequired,
-    quantity: PropTypes.number.isRequired,
+    stock: PropTypes.number.isRequired,
     addToCart: PropTypes.func.isRequired,
   }
 
@@ -22,7 +22,7 @@ class ProductItem extends Component {
     const {
       name,
       price,
-      quantity,
+      stock,
     } = this.props;
 
     return (
@@ -30,14 +30,14 @@ class ProductItem extends Component {
 
         <div className="product-content">
           <div className="product-name">{name}</div>
-          <div className="product-details">remaining in stock : {quantity}</div>
+          <div className="product-details">remaining in stock : {stock}</div>
         </div>
         <div className="product-highlight">{price} €</div>
 
         <div className="product-actions">
           <Button
             onClick={this.handleAddToCartClick}
-            disabled={!quantity}
+            disabled={!stock}
             >
             Add to cart
           </Button>
