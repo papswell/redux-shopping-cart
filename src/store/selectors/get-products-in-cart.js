@@ -1,11 +1,17 @@
-export default state => {
+import { createSelector } from 'reselect';
 
-  const selected = Object.keys(state.cart.products);
+import getProducts from './get-products';
 
-  return state.products.list
+const getCart = state => state.cart.products;
+
+export default createSelector([getProducts, getCart], (products, cart) => {
+
+  const selected = Object.keys(cart);
+
+  return products
     .filter(product => selected.includes(product.id))
     .map(p => ({
       ...p,
-      quantity: state.cart.products[p.id],
+      quantity: cart[p.id],
     }));
-}
+});
