@@ -59,15 +59,15 @@ class App extends Component {
 
             <Col sm={4}>
               <h2>T shirts</h2>
-              <ProductList />
+              <ProductList category={1} />
             </Col>
             <Col sm={4}>
               <h2>Pulls</h2>
-              <ProductList />
+              <ProductList category={2} />
             </Col>
             <Col sm={4}>
               <h2>Pantalons</h2>
-              <ProductList />
+              <ProductList category={3} />
             </Col>
           </Row>
           <Row>

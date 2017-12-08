@@ -12,10 +12,16 @@ import ProductList from './../components/product-list';
 
 const isLoadingProducts = isLoading('products');
 
-const mapStateToProps = (state) => ({
-  products: getProductsWithFilter(state),
-  isLoading: isLoadingProducts(state),
-});
+const mapStateToProps = (state, props) => {
+
+  const categoryId = props.category;
+
+  return {
+    products: getProductsWithFilter(state)
+      .filter(product => product.category === categoryId),
+    isLoading: isLoadingProducts(state),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
   addToCart,
