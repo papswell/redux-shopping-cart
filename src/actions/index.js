@@ -1,5 +1,9 @@
 import * as api from './../utils/api';
 
+export const FILTER_CHANGE = 'FILTER_CHANGE';
+
+export const filterChange = () => ({ type: FILTER_CHANGE })
+
 export const ADD_TO_CART = 'ADD_TO_CART';
 export const REMOVE_FROM_CART = 'REMOVE_FROM_CART';
 

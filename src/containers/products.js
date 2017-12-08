@@ -5,7 +5,7 @@ import {
   addToCart,
 } from './../actions';
 
-import getProducts from './../store/selectors/get-products';
+import getProductsWithFilter from './../store/selectors/get-products-with-filter';
 import isLoading from './../store/selectors/is-loading';
 
 import ProductList from './../components/product-list';
@@ -13,7 +13,7 @@ import ProductList from './../components/product-list';
 const isLoadingProducts = isLoading('products');
 
 const mapStateToProps = (state) => ({
-  products: getProducts(state),
+  products: getProductsWithFilter(state),
   isLoading: isLoadingProducts(state),
 });
 

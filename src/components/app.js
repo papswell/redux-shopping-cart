@@ -16,7 +16,7 @@ class App extends Component {
 
   render() {
 
-    const { itemCount, error } = this.props;
+    const { itemCount, error, filterChange, isChecked } = this.props;
 
     return (
       <div className="App">
@@ -31,7 +31,11 @@ class App extends Component {
             <NavItem eventKey={1}>
               <div className="toggle-container">
                 <span>Display only items in stock</span>
-                <ReactToggle />
+                <ReactToggle
+                  value="yes"
+                  checked={isChecked}
+                  onChange={filterChange}
+                />
               </div>
             </NavItem>
             <NavItem eventKey={2}>

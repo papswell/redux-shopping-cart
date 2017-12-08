@@ -2,6 +2,7 @@ import createReducer from './create-reducer';
 import { categories } from './../../utils/products';
 
 import {
+  FILTER_CHANGE,
   ADD_TO_CART,
   REMOVE_FROM_CART,
   FETCH_INITIAL_DATA,
@@ -13,9 +14,15 @@ const initialState = {
   categories,
   list: [],
   isLoading: false,
+  filterInStock: false,
 };
 
 const handlers = {};
+
+handlers[FILTER_CHANGE] = (state) => ({
+  ...state,
+  filterInStock: !state.filterInStock,
+});
 
 handlers[FETCH_INITIAL_DATA] = (state, action) => ({
   ...state,
@@ -23,6 +30,7 @@ handlers[FETCH_INITIAL_DATA] = (state, action) => ({
 });
 
 handlers[FETCH_INITIAL_DATA_SUCCESS] = (state, action) => ({
+  ...state,
   list: state.list.concat(action.payload.products.map(p => ({
     ...p,
     initialStock: p.stock,
